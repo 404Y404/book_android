@@ -1,0 +1,82 @@
+Root:
+    orientation: 'vertical'
+    name: name
+
+    TextInput:
+        id: name
+        hint_text:'Введите название'
+        size_hint: (1, 0.45)
+
+    BoxLayout:
+        size_hint: (1,0.3)
+        TextInput:
+            id: start
+            hint_text: "От"
+
+        TextInput:
+            id: stop
+            hint_text: 'До'
+
+    Button:
+        font_size: "20sp"
+        text: 'папка сохранения'
+        on_release: root.show_save()
+
+    Button:
+        font_size: "20sp"
+        text: 'База'
+        on_release: root.base_show()
+
+    Button:
+        font_size: "20sp"
+        text: 'Скачать'
+        on_press: root.download(name.text, start.text, stop.text)
+
+    
+
+    
+<SaveDialog>:
+    orientation: 'vertical'
+
+    FileChooserListView:
+        # rootpath: '/'
+        rootpath: '/storage/emulated/0/'
+        id: file
+        dirselect: True
+
+    BoxLayout:
+        size_hint: (1, 0.2)
+
+        Button:
+            text: 'Выбрать'
+            on_release: root.close(str(file.path))
+
+        Button:
+            text: 'Выйти'
+            on_release: root.exit()
+
+        
+
+        
+
+
+
+<BaseDialog>:
+    orientation: 'vertical'
+
+    FileChooserListView:
+        # rootpath: '/'
+        rootpath: '/storage/emulated/0/'
+        dirselect: True
+
+    BoxLayout:
+        size_hint: (1, 0.2)
+
+        Button:
+            text: 'Выбрать'
+            on_release: root.close(str(base.selection[0]))
+        Button:
+            text: 'Выйти'
+            on_release: root.exit()
+
+
